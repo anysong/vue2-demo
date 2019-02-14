@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <template id="m1">
+        <div>
+            <span>我是A</span>->{{a}}
+            <button @click="send">把A数据给C</button>
+        </div>
+    </template>
+    <template id="m2">
+        <div>
+            <span>我是B</span>->{{a}}
+            <button @click="send">把B数据给C</button>
+        </div>
+    </template>
+    <template id="m3">
+        <div>
+            <span>我是C</span>->{{a}}
+            <button @click="send">把C数据给A</button>
+        </div>
+    </template>
+    <div id="box">
+        <com-a></com-a>
+        <com-b></com-b>
+        <com-c></com-c>
+    </div>
+    <script>
+        //准备一个空的实例对象
+        var Event = new Vue();
+
+        var A = {
+            template: '#m1',
+            data(){
+                return {
+                    a: '我是a数据'
+                }
+            },
+            methods: {
+                send(){
+                    Event.$emit('a-msg', this.a)
+                }
+            },
+            mounted(){
+                Event.$on('c-msg', function(msg){
+                    this.a = msg;
+                }.bind(this))
+            }
+        }
+        var B = {
+            template: '#m2',
+            data(){
+                return {
+                    a: '我是b数据'
+                }
+            },
+            methods: {
+                send(){
+                    Event.$emit('b-msg', this.a)
+                }
+            }
+        }
+        var C = {
+            template: '#m3',
+            data(){
+                return {
+                    a: '我是c数据'
+                }
+            },
+            methods: {
+                send(){
+                    Event.$emit('c-msg', this.a)
+                }
+            },
+            mounted(){
+                //c组件加载完毕
+                var _this = this;
+                Event.$on('a-msg', function(msg){
+                    _this.a = msg;
+                })
+                Event.$on('b-msg', function(msg){
+                    _this.a = msg;
+                })
+            }
+        }
+        new Vue({
+            el:'#box',
+            data: {},
+            components: {
+                'com-a': A,
+                'com-b': B,
+                'com-c': C
+            }
+        })
+    </script>
+</body>
+</html>

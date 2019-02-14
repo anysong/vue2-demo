@@ -1,5 +1,5 @@
 # vue2-demo
-vue2 新特性
+vue2 新特性 第五章
 ==============
 1 在每个组件模板,不再支持片段代码
      template: '<h4>222</h4><h4>222</h4>' //不再支持
@@ -31,7 +31,29 @@ vue2 新特性
     destroyed       => destroyed     组件销毁后
 
 4 2.0循环
-    默认就可以添加重复数据
-    去掉了隐式变量 $index
-    1.0: v-for="(index), item) in list"
-    2.0: v-for="(item, index) in list"
+    1 默认就可以添加重复数据
+    2 去掉了隐式变量 $index
+    3 1.0: v-for="(index, value) in list"
+      2.0: v-for="(value, index) in list"
+    4 track-by 变成 => :key    
+
+5 自定义键盘指令
+    1.0 Vue.directive('on').keyCodes.ctrl = 17 //directive 没了
+    2.0 Vue.config.keyCodes.ctrl = 17
+
+6 过滤器
+    2.0 删除了所有内置过滤器
+    推荐用lodash 工具库
+
+7 自定义过滤器
+    1.0 自定义过滤器传参 {{msg|toDou '12' '5'}}
+    2.0 自定义过滤器传参 {{msg|toDou(12,5)}}
+
+8 组件通信
+    去掉 $broadcast
+    去掉 $dispatch
+    去掉.sync
+    1.0 子组件可以修改父组件信息,可以是同步 sync
+    2.0 子组件不允许直接给父组件数据赋值
+        但是,父级每次传递一个对象给子级,可以修改
+9 单一事件中心管理组件通信
