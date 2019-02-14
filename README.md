@@ -13,6 +13,25 @@ vue2 新特性
         template: '<h4>222</h4>'
     }
     全局: Vue.component('Home',Home);
-    局部: components: {Home}
-    
+    局部: new Vue({
+        components: {
+            Home
+        }
+    })
+
 3 生命周期
+    init            => beforeCreate  组件刚刚被创建
+    created         => created       实例已经创建完成
+    beforeCompile   => beforeMount   模版编译之前
+    compiled        => x
+    ready           => mounted       模版已经编译完成 *
+                        beforeUpdate  组件更新之前
+                        updated       组件更新完毕 *
+    beforeDestroy   => beforeDestroy 组件销毁前
+    destroyed       => destroyed     组件销毁后
+
+4 2.0循环
+    默认就可以添加重复数据
+    去掉了隐式变量 $index
+    1.0: v-for="(index), item) in list"
+    2.0: v-for="(item, index) in list"
