@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <link rel="stylesheet" href="./animate.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>
+            <router-link to="/home">home</router-link>
+            <router-link to="/user">user</router-link>
+        </div>
+        </ul>
+        <transition enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+            <router-view></router-view>
+        </transition>
+    </div>
+    <template id="user1">
+        <div>
+            <h3>user</h3>
+            <router-link to="/user/xiaoa/age/10">user-children</router-link>
+            <router-link to="/user/xiaob/age/20">user-children</router-link>
+            <router-link to="/user/xiaoc/age/30">user-children</router-link>
+            <router-view></router-view>
+        </div>
+    </template>    
+    <script>
+        //组件
+        var Home = {
+            template: '<h3>111</h3>'
+        }
+        var User = {
+            template: '#user1'
+        }
+        var Username = {
+            template: '<h3>{{$route.params}}</h3>'
+        }
+        //配置路由
+        var routes = [
+            {path:'/home', component: Home},
+            {
+                path:'/user', 
+                component: User,
+                children: [
+                    {path:':username/age/:age', component: Username},
+                ]
+            },
+            {path:'*', redirect: '/home'},
+        ]
+        //生成路由实例
+        var router = new VueRouter({
+            routes
+        })
+        //挂载vue
+        new Vue({
+            el:'#box',
+            router
+        })
+    </script>
+</body>
+</html>

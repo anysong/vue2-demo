@@ -103,14 +103,38 @@ vue2 动画 第六章
 
 
 
-
-
-
 vue2 路由 第六章
 =========================
-
-
-
-
+1 <router-link to="/home">主页</router-link>
+2 <router-view></router-view>
+3 配置路由
+    var routes = [
+        {path:'/home', component: Home},
+        {path:'/news', component: News}
+    ]
+4 生成路由实例
+    var router = new VueRouter({
+        routes
+    })
+5 挂载vue
+    new Vue({
+        el:'#box',
+        router
+    })
+6 重定向
+    {path:'*', redirect: Home},
+7 路由嵌套
+    var routes = [
+        {
+            path:'/user', 
+            component: User,
+            children: [
+                {path:'username', component: UserName}
+            ]
+        }
+    ]
+8 路由实例方法
+    router.push({path:'home'}) 切换路由,本质往历史记录里添加一个
+    router.replace({path:'news'}) 替换路由,不添加到历史记录
 
 
