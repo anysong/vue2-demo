@@ -136,5 +136,20 @@ vue2 路由 第六章
 8 路由实例方法
     router.push({path:'home'}) 切换路由,本质往历史记录里添加一个
     router.replace({path:'news'}) 替换路由,不添加到历史记录
-
-
+-------------------------
+脚手架: vue-cli
+    1.0 
+        new Vue({
+            components: {App}
+        })
+    2.0
+        new Vue({
+            render: h =>h(App)     
+        })
+    用render方法,相比较components: {App},不需要在html内写 <app></app>组件
+    //es6
+    new Vue({
+        render: (function (h) {
+            return h(App);
+        });    
+    })
