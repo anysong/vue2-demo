@@ -1,6 +1,6 @@
 # vue2-demo
 vue2 新特性 第五章
-==============
+=========================
 1 在每个组件模板,不再支持片段代码
      template: '<h4>222</h4><h4>222</h4>' //不再支持
      template: '<div><h4>222</h4><h4>222</h4></div>' //必须有一个根元素,包裹所有节点
@@ -56,4 +56,61 @@ vue2 新特性 第五章
     1.0 子组件可以修改父组件信息,可以是同步 sync
     2.0 子组件不允许直接给父组件数据赋值
         但是,父级每次传递一个对象给子级,可以修改
+
 9 单一事件中心管理组件通信
+    准备一个空的实例对象 
+    var Event = new Vue();
+    Event.$emit('事件名', 数据)
+    Event.$on('事件名', function(){
+
+    }.bind(this))
+
+vue2 动画 第六章
+=========================
+1 transition动画
+    1.0 transition 属性 <p transition="fade"></p>
+    2.0 transition 组件 
+    <transition>
+        <p></p> //只能第一层元素
+    </transition>
+
+    class定义:
+    fade-enter{}        -> 初始状态
+    fade-enter-active{} -> 变化成什么样 (当元素显示) 
+
+    fade-leave{}        -> 
+    fade-leave-active{} -> 变换成什么样 (当元素消失)
+    动画只能加在active
+
+    事件
+    @before-enter 动画进入之前
+    @enter        动画进入
+    @after-enter  动画进入之后
+    @before-leave 动画离开之前
+    @leave        动画离开
+    @after-leave  动画离开之后
+
+2 如何配合 animate.css
+    <transition enter-active-class="animated bounceInLeft"
+                leave-active-class="animated bounceOutRight">
+        <div v-show="show"></div>
+    </transition>
+3 多个元素 transition-group
+     <transition-group>
+        <p :key="1"></p>
+        <p :key="2"></p>
+    </transition-group>
+
+
+
+
+
+
+vue2 路由 第六章
+=========================
+
+
+
+
+
+
