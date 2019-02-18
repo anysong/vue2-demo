@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    ss
+    loading 
+    <loading></loading>   
   </div>
 </template>
 

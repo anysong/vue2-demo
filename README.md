@@ -160,3 +160,10 @@ vue2 Element-UI && Mint-ui 第七章
 
 vue2 Vue.use 第八章
 =========================
+|-loading/
+        |-index.js     //导出, 并且install
+        |-Loading.js   //Loading组件
+
+vuex 第九章
+=========================
+集中式管理数据
